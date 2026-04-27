@@ -1,7 +1,10 @@
 import flatpickr from 'flatpickr';
- 
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import 'flatpickr/dist/flatpickr.min.css';
 let userSelectedDate = null;
 const btnStartEl = document.querySelector('button[data-start]');
+btnStartEl.disabled = true;
 const inputEl = document.querySelector('#datetime-picker');
 
 flatpickr('#datetime-picker', {
@@ -64,6 +67,9 @@ const timer = {
   },
   stop() {
     clearInterval(this.intervalId);
+    for (const key in this.elements) {
+      this.elements[key].textContent = '00';
+    }
     inputEl.disabled = false;
     inputEl.classList.remove('countdown');
   },
